@@ -1,65 +1,11 @@
 public class RajaMantri extends Activity {
     
-	
-	@Override
-	protected void onPostResume() {
-	 super.onPostResume();
-	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		AlertDialog dialog = new AlertDialog.Builder  ((this).create();
-		dialog.setTitle("Exit game!");
-		dialog.setMessage("Are you sure you want to exit the game?");
-		dialog.setButton("Exit", new DialogInterface.OnClickListener() {
-			
-			public void onClick(DialogInterface dialog, int which) {
-		    	finish();
-				
-			}
-		});
-		dialog.setButton("Cancel", new DialogInterface.OnClickListener() {
-			
-			public void onClick(DialogInterface dialog, int which) {
-				
-				dialog.dismiss();
-				
-			}
-		});
-		dialog.show();
-		return super.onKeyDown(keyCode, event);
-	}
-
 /*
- *------------------Function for If memory space is Low----------------
- *
- */
-
-	@Override
-	public void onlowmemory() {
-		AlertDialog dialog = new AlertDialog.Builder(this).create();
-		dialog.setTitle("Low memory!");
-		dialog.setMessage("Too many apps open, kindly close some other apps and try again!");
-		dialog.setButton("Exit", new DialogInterface.OnClickListener() {
-			
-			public void onClick(DialogInterface dialog, int which) {
-				
-				finish();
-				
-			}
-		});
-		
-		dialog.show();
-		super.onLowMemory();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-	}
-
-	String[] solutionArray = { "RAJA", "MANTRI", "CHOR", "SIPAHI"};
-	String[] playersArray = {"Player1", "Player2", "Player3", "Player4"};
+*
+*--------------Declaration of variables-------------------
+*/
+String[] solutionArray = { "RAJA", "MANTRI", "CHOR", "SIPAHI"};                 //player_role 
+	String[] playersArray = {"Player1", "Player2", "Player3", "Player4"};   //players, total 4 player
 	static String player1_name = "" ;
 	static String player2_name = "";
 	static String player3_name = "";
@@ -81,24 +27,19 @@ public class RajaMantri extends Activity {
 	int count = 0;
 	
 	Button btnRajaMantri;
-	Button btnHelp;
-	ImageView btn9;
-	Button btnPlay;
+	Button btnHelp;             //button for Help
+	Button btnPlay;             //button for to start game
 	static Button btnPod1;
 	static Button btnPod2;
 	static Button btnPod3;
 	static Button btnPod4;
 	Button btnShowResult;
-	Button btnRestart;
-	Button btnSignin;
-	Button btnGuess;
+	Button btnSignIn;
 	EditText editTxtPlayer1;
 	EditText editTxtPlayer2;
 	EditText editTxtPlayer3;
 	EditText editTxtPlayer4;
-	EditText edt2;
-	EditText edt3;
-	EditText edt4;
+	
 	
 	TextView lblPlayer1;
 	TextView lblPlayer2;
@@ -111,32 +52,94 @@ public class RajaMantri extends Activity {
 	static TextView txtPlayer4;
 	Bundle savedInstanceState2;
 	Button btnMainMenu;
+	
+	@Override
+	protected void onPostResume() {
+	 super.onPostResume();
+	}
+
+
+/*
+*if you pressed down key it will show you dialog box and ask you to exit a game. 
+*/
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		AlertDialog dialog = new AlertDialog.Builder  ((this).create();
+		dialog.setTitle("Exit game!");
+		dialog.setMessage("Are you sure you want to exit the game?");
+		dialog.setButton("Exit", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {       //if you click on Exit Button it will finish game
+		    	finish();                                                     //call finish() function to exit a game
+				
+			}
+		});
+		dialog.setButton("Cancel", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				
+				dialog.dismiss();                                    //close dialog box
+				
+			}
+		});
+		dialog.show();        //show the dialog box
+		return super.onKeyDown(keyCode, event);             
+	}
+
+/*
+ *------------------Function for If memory space is not enough----------------
+ *
+ */
+
+	@Override
+	public void onlowmemory() {
+		AlertDialog dialog = new AlertDialog.Builder(this).create();
+		dialog.setTitle("Low memory!");
+		dialog.setMessage("Too many apps open, kindly close some other apps and try again!");
+		dialog.setButton("Exit", new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				
+				finish();                                          //call finish() function to exit a game
+				
+			}
+		});
+		
+		dialog.show();                                                    //show dialog box                                           
+		super.onLowMemory();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	
     
 	
 	
     public void onRestart(){
     	
-    	super.onRestart();
+    	super.onRestart();          //call onRestart() function of Activity class to restart  a game
         	
     }
     
     public void onResume(){
     	
-    	super.onResume();
+    	super.onResume();           //call onResume() function of Activity class to resume a game
     	   	
     }
 
 
-
+/*
+*function for to create activity. in this we can do : create views, bind data to lists, etc.
+* This method also provides you with a Bundle containing the activity's previously frozen state,if there was one. 
+*/
 
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);           //create first activity,pass activity state
         setContentView(R.layout.welcome);
       
-        i = 0;
-        j = 0;
-        k = 0;
-        l = 0;
         btnHelp = (Button)findViewById(R.id.btnHelp);
         btnHelp.setOnClickListener(new OnClickListener() {
 			
@@ -216,14 +219,14 @@ public class RajaMantri extends Activity {
 			
 			public void onClick(View v) {
 				Intent i = new Intent(RajaMantri.this, RajaMantri.class);
-				RajaMantri.this.startActivity(i);
+				RajaMantri.this.startActivity(i);      //start the activity,activity visible to user
 				finish();
 				
 			}
 		});
  		
- 		btnSignin = (Button) findViewById(R.id.btnsignin);
- 		btnSignin.setOnClickListener(new OnClickListener() {
+ 		btnSignIn = (Button) findViewById(R.id.btnSignIn);
+ 		btnSignIn.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
 								
@@ -276,7 +279,7 @@ public class RajaMantri extends Activity {
 				btnPlay.setOnClickListener(new OnClickListener() {
 		 			
 		 			public void onClick(View v) {
-		 				// TODO Auto-generated method stub
+		 				
 		 				
 		 				if(btnPlay.getText().equals("SHUFFLE")){
 		 				
@@ -315,20 +318,20 @@ public class RajaMantri extends Activity {
     
     public void makeGuess(){
     	
-    	btnPlay.setText("SHUFFLE");
-			count = 0;
-			btnPlay.setText("SHUFFLE");
+    	 btnPlay.setText("SHUFFLE");
+		
+			    
 			
 			btnPod1.setClickable(true);
 			btnPod2.setClickable(true);
 			btnPod3.setClickable(true);
 			btnPod4.setClickable(true);
 			
-		if(player1.equals("RAJA")){
+		if(player1.equals("RAJA")){   //if player1 is Raja then put it background
 			
 			btnPod1.setText("RAJA");
 			btnPod1.setBackgroundResource(R.drawable.podopen);
-			btnPod1.setClickable(false);
+			btnPod1.setClickable(false);    
 		}
 		if(player2.equals("RAJA")){
 			
@@ -375,7 +378,7 @@ public class RajaMantri extends Activity {
 			
 		}
 		
-		if(player1_role.equals("MANTRI")){
+		if(player1_role.equals("MANTRI")){                              //if palyer is Mantri it will find chor
 			txtTurn.setText(player1_name + " will find the CHOR!");
 		}
 		if(player2_role.equals("MANTRI")){
@@ -396,7 +399,6 @@ public class RajaMantri extends Activity {
 				
 			
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					Log.v("AkhandBakar","#########" + player1);
 					if(player1.equals("CHOR")){
 					
@@ -426,8 +428,7 @@ public class RajaMantri extends Activity {
 			btnPod2.setOnClickListener(new OnClickListener() {
 				
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Log.v("AkhandBakar","#########" + player2);
+				        Log.v("AkhandBakar","#########" + player2);
 					if(player2.equals("CHOR")){
 					
 						RajaMantri.guess = true;
@@ -456,7 +457,7 @@ public class RajaMantri extends Activity {
 				
 				
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
+					
 					Log.v("AkhandBakar","#########" + player3);
 					if(player3.equals("CHOR")){
 					
@@ -487,7 +488,6 @@ public class RajaMantri extends Activity {
 				
 			
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					Log.v("AkhandBakar","#########" + player4);
 					if(player4.equals("CHOR")){
 					
